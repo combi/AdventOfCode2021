@@ -17,6 +17,11 @@ def timeIt(func):
     return func_decorated
 
 
+def getData(inputFile):
+    with open(inputFile, 'r') as f:
+        inputData = [x for x in f.readlines() if x and not x.startswith('#')]
+        return inputData
+
 
 @timeIt
 def part1(inputData):
@@ -33,12 +38,6 @@ def part2(inputData, verbose=False):
     result = 0
 
     return result
-
-
-def getData(inputFile):
-    with open(inputFile, 'r') as f:
-        inputData = [x for x in f.readlines() if x and not x.startswith('#')]
-        return inputData
 
 
 def gogo(verbose=False, part1Test=False, part1Final=False, part2Test=False, part2Final=False):
