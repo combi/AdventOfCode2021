@@ -70,12 +70,13 @@ def timeIt(func):
 
 def getData(inputFile):
     with open(inputFile, 'r') as f:
-        inputData = [x for x in f.readlines() if x and not x.startswith('#')]
-        return inputData
+        inputDataRaw = [x.strip() for x in f.readlines() if x and not x.startswith('#')]
+    inputData = inputDataRaw
+    return inputData
 
 
 @timeIt
-def part1(inputData):
+def part1(inputData, verbose=False):
     """
     """
     result = 0
