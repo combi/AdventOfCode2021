@@ -6,7 +6,7 @@ import glob
 import re
 import time
 
-EXPECTED_TEST1  = 2
+EXPECTED_TEST1  = 37
 EXPECTED_FINAL1 = 344735
 EXPECTED_TEST2  = 168
 EXPECTED_FINAL2 = 96798233
@@ -73,7 +73,7 @@ def getData(inputFile):
     inputData = [int(x) for x in re.findall(r'-?\d+', inputDataRaw)]
     return inputData
 
-def cumulateFuel(crabsCounts, verbose=False, mode=0):
+def cumulateFuel(crabsCounts, verbose=False):
 
     cumul  = dict()
 
@@ -82,16 +82,11 @@ def cumulateFuel(crabsCounts, verbose=False, mode=0):
     prevFuel  = 0
 
     cumul[prevPos] = prevFuel
-    # cumul[prevPos] = (prevFuel, prevCrabs)
 
     for posHere, crabsHere in crabsCounts[1:]:
         distToHere = abs(posHere - prevPos)
 
-        fuelHere = 0
-        if mode == 0:
-            fuelHere = (distToHere*prevCrabs) + prevFuel
-        elif mode == 1:
-            fuelHere = (sum(range(distToHere+1))*prevCrabs) + prevFuel
+        fuelHere = (distToHere*prevCrabs) + prevFuel
 
         if verbose:
             print
@@ -117,16 +112,7 @@ def cumulateFuel2(crabsCounts, verbose=False):
 
     cumul  = dict()
     for posHere, crabsHere in crabsCounts:
-
-        fuelHere = 0
-        for otherPos, otherCrabs in crabsCounts:
-            if otherPos==posHere:
-                continue
-            distToHere = abs(posHere - otherPos)
-
-
-            fuelHere += (sum(range(distToHere+1))*otherCrabs)
-        cumul[posHere] = fuelHere
+        cumul[posHere] = fuelToPos(posHere, crabsCounts)
 
     if verbose:
         print '\n'*5
@@ -160,16 +146,6 @@ def part1(inputData, verbose=False):
         print 'sortedCrabsCounts = ', sortedCrabsCounts
         print 'forwards          = ', forwards
         print 'backwards         = ', backwards
-    # print '\n'*5
-    # print 'forwards:'
-    # for pos, fuel in sorted(forwards.items()):
-    #     # print 'At %d, %d crabs, %d fuel' %(pos, fuel)
-    #     print 'At %d, %d fuel' %(pos, fuel)
-    # # print '\n'*5
-    # print 'backwards:'
-    # for pos, fuel in sorted(backwards.items(), reverse=True):
-    #     # print 'At %d, %d crabs, %d fuel' %(pos, fuel)
-    #     print 'At %d, %d fuel' %(pos, fuel)
 
 
     fuelCostsAtEachPos = dict()
@@ -178,7 +154,7 @@ def part1(inputData, verbose=False):
 
     # print 'fuelCostsAtEachPos =', fuelCostsAtEachPos
     minCost = sorted(fuelCostsAtEachPos.items(), key=lambda x:x[1])
-    print 'minCost =', minCost
+    # print 'minCost =', minCost
     result = minCost[0][1]
     return result
 
@@ -266,5 +242,5 @@ def test():
 
 if __name__=="__main__":
     print(sys.version)
-    # gogo(verbose=False, part1Test=False, part1Final=False, part2Test=True, part2Final=True)
-    test()
+    gogo(verbose=False, part1Test=True, part1Final=True, part2Test=True, part2Final=True)
+    # test()
