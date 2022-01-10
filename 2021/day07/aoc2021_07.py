@@ -9,7 +9,7 @@ import time
 EXPECTED_TEST1  = 2
 EXPECTED_FINAL1 = 344735
 EXPECTED_TEST2  = 168
-EXPECTED_FINAL2 = None
+EXPECTED_FINAL2 = 96798233
 
 def gogo(verbose=False, part1Test=False, part1Final=False, part2Test=False, part2Final=False):
     location     = os.path.dirname(__file__)
