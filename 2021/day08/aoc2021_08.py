@@ -98,7 +98,6 @@ numSegmentsToNumber = {
     4:4,  # 4 segments > it is the number 4
     7:8}  # 7 segments > it is the number 8
 
-
 def gogo(verbose=False, part1Test=False, part1Final=False, part2Test=False, part2Final=False):
     location     = os.path.dirname(__file__)
     current      = os.path.basename(__file__).split('.')[0]
@@ -177,12 +176,6 @@ def part1(inputData, verbose=False):
     """
     """
     result = 0
-    # segmentsOnToNumber = {
-    #     2:1,  # 2 segments > it is the number 1
-    #     3:7,  # 3 segments > it is the number 7
-    #     4:4,  # 4 segments > it is the number 4
-    #     7:8}  # 7 segments > it is the number 8
-
     for I,O, in inputData:
         if verbose: print I, O
         for o in O:
@@ -197,38 +190,23 @@ def part1(inputData, verbose=False):
 def part2(inputData, verbose=False):
     """
     """
-    # verbose = True
     result = 0
 
     for I,O in inputData:
         CURRENT_MAP = dict()
 
         byNumSegs = collections.defaultdict(set)
-        # print
-        # print I
-        # if verbose: print I, O
         for i in I:
-            # if verbose: print '  ', i
-            # print 'i =', i
             numSegments = len(i)
             byNumSegs[numSegments].add(i)
-            # print '   numSegments =', numSegments
+
             foundNumber = numSegmentsToNumber.get(numSegments)
             if foundNumber:
                 CURRENT_MAP[foundNumber] = set(i)
 
-        # print 'byNumSegs =', byNumSegs
-        # print 'CURRENT_MAP =', CURRENT_MAP
         a  = CURRENT_MAP[7] - CURRENT_MAP[1]
         bd = CURRENT_MAP[4] - CURRENT_MAP[1]
         eg = CURRENT_MAP[8] - (CURRENT_MAP[4] | a)
-        # cf = CURRENT_MAP[8] - (a | bd | eg)
-        # print 'a  =', a
-        # print 'bd =', bd
-        # print 'eg =', eg
-        # print 'cf =', cf, cf == CURRENT_MAP[1]
-
-        # print 'byNumSegs[5] =', byNumSegs[5]
         for s in byNumSegs[5]:
             s_ = set(s)
             if CURRENT_MAP[7].issubset(s_):
@@ -236,11 +214,8 @@ def part2(inputData, verbose=False):
                 break
         CURRENT_MAP[9] = CURRENT_MAP[3] | bd
         be = CURRENT_MAP[8] - CURRENT_MAP[3]
-        # be = CURRENT_MAP[8] - CURRENT_MAP[3]
-        # print 'be =', be
         e = CURRENT_MAP[8] - CURRENT_MAP[9]
         g = eg - e
-        # b = be - e
         CURRENT_MAP[0] = CURRENT_MAP[1] | be | a | g
 
         for s in byNumSegs[5]:
@@ -264,9 +239,6 @@ def part2(inputData, verbose=False):
         assert(CURRENT_MAP[2])
         assert(CURRENT_MAP[5])
         assert(CURRENT_MAP[6])
-        # print 'CURRENT_MAP =', CURRENT_MAP
-        # for number, segments in CURRENT_MAP.items():
-        #     print number, segments
 
         current4DigitNum = ''
         for o in O:
@@ -279,10 +251,6 @@ def part2(inputData, verbose=False):
         number = int(current4DigitNum)
 
         result += number
-
-
-
-
     return result
 
 '''
