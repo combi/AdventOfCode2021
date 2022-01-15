@@ -94,4 +94,7 @@ def part2(inputData, verbose=False):
 
 if __name__=="__main__":
     print(sys.version)
-    gogo(verbose=False, part1Test=True, part1Final=False, part2Test=False, part2Final=False)
+    gogo(verbose=False, part1Test=True)
+    gogo(verbose=False, part1Final=False)
+    gogo(verbose=False, part2Test=False)
+    gogo(verbose=False, part2Final=False)
