@@ -9,7 +9,7 @@ import time
 EXPECTED_TEST1  = 5
 EXPECTED_FINAL1 = 6283
 EXPECTED_TEST2  = 12
-EXPECTED_FINAL2 = None
+EXPECTED_FINAL2 = 18864
 
 
 def gogo(verbose=False, part1Test=False, part1Final=False, part2Test=False, part2Final=False):
@@ -205,5 +205,8 @@ def test():
 
 if __name__=="__main__":
     print(sys.version)
-    gogo(verbose=False, part1Test=False, part1Final=True, part2Test=True, part2Final=True)
+    gogo(verbose=False, part1Test=True)
+    gogo(verbose=False, part1Final=True)
+    gogo(verbose=False, part2Test=True)
+    gogo(verbose=False, part2Final=True)
     # test()
